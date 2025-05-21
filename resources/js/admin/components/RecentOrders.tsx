@@ -1,67 +1,46 @@
 // resources/js/admin/components/RecentOrders.tsx
-import { Clock, CheckCircle2, XCircle } from 'lucide-react';
-
-interface Order {
-  id: string;
-  customer: string;
-  date: string;
-  amount: string;
-  status: 'completed' | 'pending' | 'failed';
-}
+import { cn } from '@/utils';
 
 export function RecentOrders() {
-  const orders: Order[] = [
-    { id: '#ORD-001', customer: 'Juan Pérez', date: '2023-05-15', amount: '$120', status: 'completed' },
-    { id: '#ORD-002', customer: 'María García', date: '2023-05-14', amount: '$85', status: 'pending' },
-    { id: '#ORD-003', customer: 'Carlos López', date: '2023-05-14', amount: '$210', status: 'failed' },
-    { id: '#ORD-004', customer: 'Ana Martínez', date: '2023-05-13', amount: '$65', status: 'completed' },
+  const orders = [
+    { id: '#ORD-001', customer: 'Ana García', date: '2025-05-20', amount: '$120', status: 'Completado' },
+    { id: '#ORD-002', customer: 'Carlos López', date: '2025-05-19', amount: '$85', status: 'En proceso' },
+    { id: '#ORD-003', customer: 'Miguel Rodríguez', date: '2025-05-18', amount: '$240', status: 'Completado' },
+    { id: '#ORD-004', customer: 'Laura Martínez', date: '2025-05-17', amount: '$65', status: 'Cancelado' },
+    { id: '#ORD-005', customer: 'Daniel Pérez', date: '2025-05-16', amount: '$180', status: 'Completado' },
   ];
 
   return (
     <div>
-      <h2 className="text-xl font-semibold text-gray-800 p-6 pb-0">Pedidos Recientes</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Monto</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {orders.map((order) => (
-              <tr key={order.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{order.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.customer}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.date}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.amount}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {order.status === 'completed' && (
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      <CheckCircle2 className="h-3 w-3 mr-1" />
-                      Completado
-                    </span>
-                  )}
-                  {order.status === 'pending' && (
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                      <Clock className="h-3 w-3 mr-1" />
-                      Pendiente
-                    </span>
-                  )}
-                  {order.status === 'failed' && (
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                      <XCircle className="h-3 w-3 mr-1" />
-                      Fallido
-                    </span>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className={cn(
+        "px-6 py-4 border-b",
+        "border-slate-200 dark:border-slate-700",
+        "bg-slate-50 dark:bg-slate-700/50"
+      )}>
+        <h2 className="text-xl font-semibold text-slate-800 dark:text-white">Órdenes Recientes</h2>
+      </div>
+      <div className="divide-y divide-slate-200 dark:divide-slate-700">
+        {orders.map((order) => (
+          <div key={order.id} className="px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium text-slate-800 dark:text-white">{order.id}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">{order.customer}</p>
+              </div>
+              <div className="text-right">
+                <p className="font-medium text-slate-800 dark:text-white">{order.amount}</p>
+                <p className={cn(
+                  "text-sm",
+                  order.status === 'Completado' ? "text-green-600 dark:text-green-400" :
+                  order.status === 'En proceso' ? "text-yellow-600 dark:text-yellow-400" :
+                  "text-red-600 dark:text-red-400"
+                )}>
+                  {order.status}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

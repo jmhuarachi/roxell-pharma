@@ -90,7 +90,7 @@ export const Sidebar = () => {
                   className="flex items-center"
                 >
                   <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">A</span>
+                    <span className="text-white font-bold text-lg">AP</span>
                   </div>
                   <motion.span 
                     variants={textVariants}
@@ -109,7 +109,7 @@ export const Sidebar = () => {
                   exit={{ opacity: 0 }}
                   className="w-8 h-8 mx-auto bg-blue-500 rounded-lg flex items-center justify-center"
                 >
-                  <span className="text-white font-bold text-lg">A</span>
+                  <span className="text-white font-bold text-lg">AP</span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -120,7 +120,7 @@ export const Sidebar = () => {
               onClick={() => setSidebarOpen(!sidebarOpen)}
               className="p-2 rounded-full text-blue-300 hover:text-white hover:bg-blue-800/50 transition-colors"
             >
-              {sidebarOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+              {sidebarOpen ? <ChevronLeft size={25} /> : <ChevronRight size={25} />}
             </motion.button>
           </div>
 

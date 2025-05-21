@@ -10,6 +10,8 @@ import { TooltipProvider } from '@radix-ui/react-tooltip';
 type PageModule = {
   default: {
     layout?: (page: ReactNode) => ReactElement;
+    title?: string;
+    description?: string;
   };
 };
 
@@ -31,8 +33,13 @@ createInertiaApp({
       );
       
       page.then((module: PageModule) => {
+        const { title = 'Admin Panel', description } = module.default;
         module.default.layout = module.default.layout || 
-          ((page: ReactNode) => <AdminLayout>{page}</AdminLayout>);
+          ((page: ReactNode) => (
+            <AdminLayout title={title} description={description}>
+              {page}
+            </AdminLayout>
+          ));
       });
       
       return page;

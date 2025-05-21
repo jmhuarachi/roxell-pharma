@@ -64,7 +64,7 @@ const getPageDescription = (title: string): string => {
     'Usuarios': 'Gestión y administración de usuarios del sistema',
     'Productos': 'Catálogo y administración de productos',
     'Noticias': 'Gestión de publicaciones y noticias',
-    'Admin Panel': 'Panel de administración sasas moderno y futurista'
+    'Admin Panel': 'Panel de administración '
   };
   
   return descriptions[title] || `Gestión de ${title.toLowerCase()}`;
@@ -205,7 +205,7 @@ export default function AdminLayout({
                   "dark:bg-opacity-50"
                 )}
               >
-                <div className="p-6">
+                <div className="p-6 bg-white dark:bg-slate-800">
                   {children}
                 </div>
               </motion.div>
