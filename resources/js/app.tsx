@@ -1,12 +1,12 @@
-// resources/js/app.tsx
 import '../css/app.css';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import AppLayout from '@/layouts/AppLayout';
+import AdminLayout from '@/admin/layouts/AdminLayout';
 import { ReactElement, ReactNode } from 'react';
+import { TooltipProvider } from '@radix-ui/react-tooltip';
 
-// Define el tipo para el módulo de página
 type PageModule = {
   default: {
     layout?: (page: ReactNode) => ReactElement;
@@ -23,6 +23,22 @@ createInertiaApp({
     return title || appName || '';
   },
   resolve: (name) => {
+    // Para páginas de admin
+    if (name.startsWith('Admin/')) {
+      const page = resolvePageComponent(
+        `./admin/pages/${name.replace('Admin/', '')}.tsx`,
+        import.meta.glob<PageModule>('./admin/pages/**/*.tsx')
+      );
+      
+      page.then((module: PageModule) => {
+        module.default.layout = module.default.layout || 
+          ((page: ReactNode) => <AdminLayout>{page}</AdminLayout>);
+      });
+      
+      return page;
+    }
+
+    // Para páginas normales
     const page = resolvePageComponent(
       `./pages/${name}.tsx`,
       import.meta.glob<PageModule>('./pages/**/*.tsx')
@@ -37,28 +53,31 @@ createInertiaApp({
   },
   setup({ el, App, props }) {
     const root = createRoot(el);
-    root.render(<App {...props} />);
+    
+    root.render(
+      <TooltipProvider>
+        <App {...props} />
+      </TooltipProvider>
+    );
   },
   progress: {
     color: '#f4d03f',
     showSpinner: true,
     includeCSS: true,
     delay: 100,
-
   },
 });
 
 
-// // resources/js/app.tsx
 // import '../css/app.css';
 // import { createInertiaApp } from '@inertiajs/react';
 // import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 // import { createRoot } from 'react-dom/client';
 // import AppLayout from '@/layouts/AppLayout';
+// import AdminLayout from '@/admin/layouts/AdminLayout';
 // import { ReactElement, ReactNode } from 'react';
-// import { TooltipProvider } from '@radix-ui/react-tooltip'; // Importa el TooltipProvider
+// import { TooltipProvider } from '@radix-ui/react-tooltip';
 
-// // Define el tipo para el módulo de página
 // type PageModule = {
 //   default: {
 //     layout?: (page: ReactNode) => ReactElement;
@@ -75,20 +94,23 @@ createInertiaApp({
 //     return title || appName || '';
 //   },
 //   resolve: (name) => {
-//     const page = resolvePageComponent(
+//     // Ruta para páginas de admin
+//     if (name.startsWith('Admin/')) {
+//       return resolvePageComponent(
+//         `./admin/pages/${name.replace('Admin/', '')}.tsx`,
+//         import.meta.glob<PageModule>('./admin/pages/**/*.tsx')
+//       );
+//     }
+
+//     // Ruta para páginas normales
+//     return resolvePageComponent(
 //       `./pages/${name}.tsx`,
 //       import.meta.glob<PageModule>('./pages/**/*.tsx')
 //     );
-    
-//     page.then((module: PageModule) => {
-//       module.default.layout = module.default.layout || 
-//         ((page: ReactNode) => <AppLayout>{page}</AppLayout>);
-//     });
-    
-//     return page;
 //   },
 //   setup({ el, App, props }) {
 //     const root = createRoot(el);
+    
 //     root.render(
 //       <TooltipProvider>
 //         <App {...props} />

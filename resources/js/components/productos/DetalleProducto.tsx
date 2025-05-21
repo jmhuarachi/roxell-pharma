@@ -196,8 +196,8 @@ const DetalleProducto = () => {
                     </div>
 
                     {/* Precios y acciones */}
-                    {/*
-                    <div className="bg-amber-50 rounded-lg p-4 sticky bottom-0">
+                    
+                    <div className="bg-amber-50 rounded-lg p-4 sticky bottom-0 text-center">
                         {/* <div className="grid grid-cols-2 gap-4 mb-4">
                             <div>
                                 <span className="font-medium text-amber-700">Precio al contado:</span>
@@ -222,7 +222,7 @@ const DetalleProducto = () => {
                         </div> */}
 
                         {/* Selector de cantidad */}
-                        {/* <div className="mb-4">
+                        <div className="mb-4">
                             <label htmlFor="cantidad" className="block font-medium text-amber-700 mb-2">
                                 Cantidad:
                             </label>
@@ -258,22 +258,22 @@ const DetalleProducto = () => {
                             {errorCantidad && (
                                 <p className="mt-1 text-sm text-red-600">{errorCantidad}</p>
                             )}
-                        </div> */}
+                        </div> 
                         
-                        {/* <button
+                         <button
                             onClick={handleAgregarAlCarrito}
                             disabled={productoSeleccionado.stock <= 0 || cantidad < 1 || cantidad > productoSeleccionado.stock}
-                            className={`w-full font-bold py-3 px-4 rounded-lg transition-colors ${
+                            className={`w-40  font-bold py-3 px-4 rounded-lg transition-colors ${
                                 productoSeleccionado.stock > 0 && cantidad >= 1 && cantidad <= productoSeleccionado.stock
                                     ? 'bg-amber-500 hover:bg-amber-600 text-white' 
                                     : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                             }`}
                         >
-                            {productoSeleccionado.stock > 0 ? 'Añadir al carrito' : 'Producto agotado'}
+                            {productoSeleccionado.stock > 0 ? 'Realizar Pedido' : 'Producto agotado'}
                         </button> 
                     </div> 
                     
-                     */}
+                     
                 </div>
             </div>
         </motion.div>

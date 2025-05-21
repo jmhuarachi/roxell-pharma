@@ -9,9 +9,9 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/js/app.tsx',
-                'resources/js/pages/HomePage.tsx'
-                
-              ],
+                'resources/js/admin/pages/Dashboard.tsx',
+                'resources/js/admin/pages/UserManagement.tsx'
+            ],
             ssr: 'resources/js/ssr.tsx',
             refresh: true,
         }),
@@ -26,15 +26,15 @@ export default defineConfig({
             'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
             '@': resolve(__dirname, 'resources/js'),
             '@components': resolve(__dirname, 'resources/js/components'),
-
+            '@admin': resolve(__dirname, 'resources/js/admin'), // Añade este alias
         },
     },
     build: {
-    assetsDir: 'assets', // Directorio para assets
-    rollupOptions: {
-      output: {
-        assetFileNames: 'assets/[name]-[hash][extname]',
-      },
+        assetsDir: 'assets',
+        rollupOptions: {
+            output: {
+                assetFileNames: 'assets/[name]-[hash][extname]',
+            },
+        },
     },
-  },
 });

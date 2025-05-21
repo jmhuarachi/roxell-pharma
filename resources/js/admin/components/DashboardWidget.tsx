@@ -28,6 +28,7 @@ export const DashboardWidget = ({ title, value, change, icon }: MetricCardProps)
             className={cn(
               'inline-flex items-center text-sm font-medium',
               isPositive ? 'text-green-600' : 'text-red-600'
+              
             )}
           >
             {isPositive ? (

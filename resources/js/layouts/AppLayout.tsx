@@ -28,6 +28,7 @@ export default function AppLayout({ children, title = 'RP' }: AppLayoutProps) {
       <Footer />
       <Chatbot/>
       
+      
     </div>
     
     </>

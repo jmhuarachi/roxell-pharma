@@ -60,7 +60,7 @@ const ProductosPage: React.FC = () => {
                                         <p className="text-amber-700">No hay productos disponibles con los filtros seleccionados</p>
                                     </div>
                                 ) : (
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                                         {productos.map((producto) => (
                                             <ProductoCard key={producto.id} producto={producto} />
                                         ))}
